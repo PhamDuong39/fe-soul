@@ -5,14 +5,22 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "develop", "master" ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
   pull_request:
-    branches: [ "master" ]
+    branches: [ "develop", "master" ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, windows-latest, macOS-latest]
 
     strategy:
       matrix:

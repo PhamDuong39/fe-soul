@@ -24,7 +24,7 @@ on:
       - '**/*.gitattributes'
 
 jobs:
-  build-development:
+  build-development-linux:
     if: (github.event_name == 'push' && github.ref == 'refs/heads/develop') || (github.event_name == 'pull_request' && github.head_ref == 'develop')
     runs-on: ubuntu-latest
 
@@ -40,9 +40,45 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - run: npm run build:development
+      - run: npm run build:dev
 
-  build-production:
+  build-development-windows:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/develop') || (github.event_name == 'pull_request' && github.head_ref == 'develop')
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [21.7.1]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build:dev
+
+  build-development-macos:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/develop') || (github.event_name == 'pull_request' && github.head_ref == 'develop')
+    runs-on: macOS-latest
+
+    strategy:
+      matrix:
+        node-version: [21.7.1]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build:dev
+
+  build-production-linux:
     if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || (github.event_name == 'pull_request' && github.head_ref == 'master')
     runs-on: ubuntu-latest
 
@@ -58,11 +94,83 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - run: npm run build:production
+      - run: npm run build:prod
 
-  build-staging:
+  build-production-windows:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || (github.event_name == 'pull_request' && github.head_ref == 'master')
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [21.7.1]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build:prod
+
+  build-production-macos:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || (github.event_name == 'pull_request' && github.head_ref == 'master')
+    runs-on: macOS-latest
+
+    strategy:
+      matrix:
+        node-version: [21.7.1]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build:prod
+
+  build-staging-linux:
     if: (github.event_name == 'push' && github.ref == 'refs/heads/staging') || (github.event_name == 'pull_request' && github.head_ref == 'staging')
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [21.7.1]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build:staging
+
+  build-staging-windows:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/staging') || (github.event_name == 'pull_request' && github.head_ref == 'staging')
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [21.7.1]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build:staging
+
+  build-staging-macos:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/staging') || (github.event_name == 'pull_request' && github.head_ref == 'staging')
+    runs-on: macOS-latest
 
     strategy:
       matrix:

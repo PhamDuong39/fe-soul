@@ -25,4 +25,12 @@ export default [
       },
     ],
   },
+  {
+    title: "Giỏ hàng",
+    to: { name: "cart" },
+    icon: { icon: "tabler-shopping-cart" },
+    meta: {
+      roles: [roleConstant.user, roleConstant.admin],
+    },
+  },
 ]

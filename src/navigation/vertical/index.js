@@ -25,4 +25,20 @@ export default [
       },
     ],
   },
+  {
+    title: "product",
+    icon: { icon: "tabler-home" },
+    meta: {
+      roles: [roleConstant.tenant],
+    },
+    children: [
+      {
+        title: "Product Detail",
+        to: "product-product-detail",
+        meta: {
+          roles: [roleConstant.tenant],
+        },
+      },
+    ],
+  },
 ]
